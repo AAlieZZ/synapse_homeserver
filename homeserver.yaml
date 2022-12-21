@@ -1,0 +1,52 @@
+# Configuration file for Synapse.
+#
+# This is a YAML file: see [1] for a quick introduction. Note in particular
+# that *indentation is important*: all the elements of a list or dictionary
+# should have the same indentation.
+#
+# [1] https://docs.ansible.com/ansible/latest/reference_appendices/YAMLSyntax.html
+#
+# For more information on how to configure Synapse, including a complete accounting of
+# each option, go to docs/usage/configuration/config_documentation.md or
+# https://matrix-org.github.io/synapse/latest/usage/configuration/config_documentation.html
+server_name: "aaa.bbb.ccc"
+pid_file: /data/homeserver.pid
+enable_registration: true
+email:
+  smtp_host: smtp.mail.com
+  smtp_port: 587
+  smtp_user: "aa@mail.com"
+  smtp_pass: "123"
+  force_tls: true
+  require_transport_security: true
+  notif_from: "Your Friendly %(app)s homeserver <aa840@mail.com>"
+  app_name: A_matrix_Z
+  enable_notifs: true
+  notif_for_new_users: false
+  invite_client_location: https://app.element.io
+registrations_require_3pid:
+  - email
+listeners:
+  - port: 8008
+    tls: false
+    type: http
+    x_forwarded: true
+    resources:
+      - names: [client, federation]
+        compress: false
+database:
+  name: sqlite3
+  args:
+    database: /data/homeserver.db
+log_config: "/data/aaa.bbb.ccc.log.config"
+media_store_path: /data/media_store
+registration_shared_secret: "@e2cLXYgB2kUoeXpdCwtl8GqH2hgtuxgUl.PAs4WjfxzgfljEa"
+report_stats: true
+macaroon_secret_key: "0r=mSB02PG:_hV8EI=sGc*al_R#PX:m&TROwU3q~0vVUa9D;Ng"
+form_secret: "V76lm0S1upO,P2_cr_UdIJ^IoUA0_3sdbtH0T;0&*rT@R5_^X."
+signing_key_path: "/data/aaa.bbb.ccc.signing.key"
+trusted_key_servers:
+  - server_name: "matrix.org"
+
+
+# vim:ft=yaml
